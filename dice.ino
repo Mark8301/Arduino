@@ -12,6 +12,10 @@ int fourth=10;
 int fifth=9;
 int sixth=8;
 
+int pace=100;
+
+int myLED[6]={13, 12, 11, 10, 9, 8};
+
 // pin for the button switch
 int button=7; 
 // value to check state of button switch
@@ -38,8 +42,7 @@ void loop() {
   // if button is pressed - throw the dice
   pressed = digitalRead(button);
 
-  if (pressed == HIGH) {
-    int randomNum=random(1,7);
+  if (pressed == LOW) {
     // remove previous number to LOW
     digitalWrite(first,LOW);
     digitalWrite(second,LOW);
@@ -49,9 +52,59 @@ void loop() {
     digitalWrite(sixth,LOW);
     
     // get a random number in the range [1,6]
-    int randomNum=random(1,7);    
+    int numLights=random(1,7);    
     //write IF statements to light up the lights
-    digitalWrite(first, HIGH);    
+    digitalWrite(first, HIGH);
+    
+
+    
+    if (numLights==1) {
+    digitalWrite(myLED[0],HIGH);  
+    }    
+    if (numLights==2) {
+      digitalWrite(myLED[0],HIGH);
+      delay(pace);
+      digitalWrite(myLED[1],HIGH);
+    }
+    if (numLights==3) {
+      digitalWrite(myLED[0],HIGH);
+      delay(pace);
+      digitalWrite(myLED[1],HIGH);
+      delay(pace);
+      digitalWrite(myLED[2],HIGH);
+    }
+ if (numLights==4) {
+      digitalWrite(myLED[0],HIGH);
+      delay(pace);
+      digitalWrite(myLED[1],HIGH);
+      delay(pace);
+      digitalWrite(myLED[2],HIGH);
+      delay(pace);
+      digitalWrite(myLED[3],HIGH);
+    }
+if (numLights==5) {
+      digitalWrite(myLED[0],HIGH);
+      delay(pace);
+      digitalWrite(myLED[1],HIGH);
+      delay(pace);
+      digitalWrite(myLED[2],HIGH);
+      delay(pace);
+      digitalWrite(myLED[3],HIGH);
+      delay(pace);
+      digitalWrite(myLED[4],HIGH);
+    }
+   if (numLights==6) {
+      digitalWrite(myLED[0],HIGH);
+      delay(pace);
+      digitalWrite(myLED[1],HIGH);
+      delay(pace);
+      digitalWrite(myLED[2],HIGH);
+      delay(pace);
+      digitalWrite(myLED[3],HIGH);
+      delay(pace);
+      digitalWrite(myLED[4],HIGH);
+      delay(pace);
+      digitalWrite(myLED[5],HIGH);
+    }   
   } 
 }
-
