@@ -44,67 +44,21 @@ void loop() {
 
   if (pressed == LOW) {
     // remove previous number to LOW
-    digitalWrite(first,LOW);
-    digitalWrite(second,LOW);
-    digitalWrite(third,LOW);
-    digitalWrite(fourth,LOW);
-    digitalWrite(fifth,LOW);
-    digitalWrite(sixth,LOW);
+    for (int i = 0; i < 6; i++){
+      digitalWrite(myLED[i], LOW);
+      
+    }
     
     // get a random number in the range [1,6]
     int numLights=random(1,7);    
     //write IF statements to light up the lights
     digitalWrite(first, HIGH);
-    
 
-    
-    if (numLights==1) {
-    digitalWrite(myLED[0],HIGH);  
-    }    
-    if (numLights==2) {
-      digitalWrite(myLED[0],HIGH);
-      delay(pace);
-      digitalWrite(myLED[1],HIGH);
-    }
-    if (numLights==3) {
-      digitalWrite(myLED[0],HIGH);
-      delay(pace);
-      digitalWrite(myLED[1],HIGH);
-      delay(pace);
-      digitalWrite(myLED[2],HIGH);
-    }
- if (numLights==4) {
-      digitalWrite(myLED[0],HIGH);
-      delay(pace);
-      digitalWrite(myLED[1],HIGH);
-      delay(pace);
-      digitalWrite(myLED[2],HIGH);
-      delay(pace);
-      digitalWrite(myLED[3],HIGH);
-    }
-if (numLights==5) {
-      digitalWrite(myLED[0],HIGH);
-      delay(pace);
-      digitalWrite(myLED[1],HIGH);
-      delay(pace);
-      digitalWrite(myLED[2],HIGH);
-      delay(pace);
-      digitalWrite(myLED[3],HIGH);
-      delay(pace);
-      digitalWrite(myLED[4],HIGH);
-    }
-   if (numLights==6) {
-      digitalWrite(myLED[0],HIGH);
-      delay(pace);
-      digitalWrite(myLED[1],HIGH);
-      delay(pace);
-      digitalWrite(myLED[2],HIGH);
-      delay(pace);
-      digitalWrite(myLED[3],HIGH);
-      delay(pace);
-      digitalWrite(myLED[4],HIGH);
-      delay(pace);
-      digitalWrite(myLED[5],HIGH);
-    }   
+    for(int i = 0; i < 6; i++){
+      if (i < numLights){
+        digitalWrite(myLED[i], HIGH);
+        delay(pace);
+      }
+    }  
   } 
 }
