@@ -12,7 +12,11 @@ int fourth=10;
 int fifth=9;
 int sixth=8;
 
-int pace=100;
+boolean jackpot=false;
+
+int pace=300;
+
+int scoreLED=5;
 
 int myLED[7]={13, 12, 11, 10, 9, 8, 6};
 
@@ -30,9 +34,12 @@ void setup() {
   // set buttin pin to INPUT
   pinMode(button, INPUT);
   digitalWrite(button, HIGH);
+  pinMode(scoreLED, OUTPUT);
 
   // initialize random seed by noise from analog pin 0 (should be unconnected)
   randomSeed(analogRead(0));
+
+  attachInterrupt( 0 , interrupt , FALLING );
 }
 
 void loop() {
@@ -49,23 +56,61 @@ void loop() {
    
     //write IF statements to light up the lights
     digitalWrite(first, HIGH);
-
+//Going Up and turning LEDs on
     for(int i = 0; i < 7; i++){
-
+        if(i == 3){
+          jackpot=true;
+        }
         digitalWrite(myLED[i], HIGH);
         delay(pace);
         digitalWrite(myLED[i], LOW);
         delay(pace);
-        
+        if(i == 3){
+          jackpot=false;
+        }
+              
     }
+ //Going down and turning LEDs on  
     for(int i = 6; i >= 0; i--){
-
-      digitalWrite(myLED[i], HIGH);
+        if (i == 3){
+          jackpot=true;
+        }
+        digitalWrite(myLED[i], HIGH);
         delay(pace);
         digitalWrite(myLED[i], LOW);
         delay(pace);
+        if (i == 3){
+          jackpot=false;
+        }
+        
     }
     
       
 //  } 
 }
+
+
+void interrupt(){
+ delayMicroseconds(20000);
+ //IF button not Pressed exit function
+
+ //else increase speed and if midLED is on
+  //incrament score, else  you lost
+  if (jackpot){
+    digitalWrite(scoreLED, HIGH);
+  } else {
+    digitalWrite(scoreLED, LOW);
+  }
+
+// else{
+//    //ya lost
+//    Serial.begin(9600);
+//    Serial.print( "Your score: " );
+//    Serial.println( score );
+//    while(1){
+//    //game over
+//    }
+// }
+}
+
+
