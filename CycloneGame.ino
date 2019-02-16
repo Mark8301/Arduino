@@ -21,11 +21,20 @@ int scoreLED=5;
 int myLED[7]={13, 12, 11, 10, 9, 8, 6};
 
 // pin for the button switch
-int button=7; 
+int button=2; 
 // value to check state of button switch
 int pressed;
 
+void blinklight(int LED, int pace ){
+  digitalWrite(LED, HIGH);
+  delay(pace);
+  digitalWrite(LED, LOW);
+  delay(pace);
+}
+
+
 void setup() {
+  blinklight(2,800);
   // set all LED pins to OUTPUT
   for (int i = 0; i < 7; i++){
     pinMode(myLED[i], OUTPUT);
@@ -61,10 +70,7 @@ void loop() {
         if(i == 3){
           jackpot=true;
         }
-        digitalWrite(myLED[i], HIGH);
-        delay(pace);
-        digitalWrite(myLED[i], LOW);
-        delay(pace);
+        blinklight(myLED[i],pace );
         if(i == 3){
           jackpot=false;
         }
@@ -75,10 +81,8 @@ void loop() {
         if (i == 3){
           jackpot=true;
         }
-        digitalWrite(myLED[i], HIGH);
-        delay(pace);
-        digitalWrite(myLED[i], LOW);
-        delay(pace);
+
+        blinklight(myLED[i],pace);
         if (i == 3){
           jackpot=false;
         }
@@ -91,13 +95,14 @@ void loop() {
 
 
 void interrupt(){
- delayMicroseconds(20000);
+// delayMicroseconds(20000);
  //IF button not Pressed exit function
 
  //else increase speed and if midLED is on
   //incrament score, else  you lost
   if (jackpot){
     digitalWrite(scoreLED, HIGH);
+    pace=pace-50;
   } else {
     digitalWrite(scoreLED, LOW);
   }
